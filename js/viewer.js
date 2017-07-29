@@ -4,6 +4,18 @@ var map;
 function init(){
     var url = 'http://data.actmapi.act.gov.au/arcgis/rest/services/actmapi/imagery2015mga/MapServer';
     var baseUrl = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
+    // Set up pop-up wrappers
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
+    var overlay = new ol.Overlay({element: container});
+    // Listener for the pop-up close button
+    closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        //vectorLayer.getSource().clear();
+        return false;
+    };
 
     var arcgisLayer = new ol.layer.Tile({
         source: new ol.source.TileArcGISRest({
@@ -15,6 +27,14 @@ function init(){
         source: new ol.source.TileArcGISRest({
             url: baseUrl
         })
+    });
+
+	var currentGardens = new ol.layer.Tile({
+        source: new ol.source.TileWMS(({
+            url: 'http://gis.opboomtown.com/geoserver/wms',
+            params: {'LAYERS': 'cite:communitygardens', 'TILED': true},
+            serverType: 'geoserver'
+        }))
     });
 
     var view = new ol.View({
@@ -35,10 +55,51 @@ function init(){
         loadTilesWhileAnimating: false,
         loadTilesWhileInteracting:false,
         target: 'map',
-        layers: [baseLayer,arcgisLayer],
-        view: view
+        layers: [baseLayer,arcgisLayer,currentGardens],
+        view: view,
+        overlays: [overlay]
     });
     scaleLineControl.setUnits("metric");
+
+    map.on('singleclick', function(evt) {
+        var wmsSource = new ol.source.TileWMS({
+            url: 'http://gis.opboomtown.com/geoserver/wms',
+            params: {'LAYERS': ['communitygardens']},
+            serverType: 'geoserver'
+        });
+        var url = wmsSource.getGetFeatureInfoUrl(
+            evt.coordinate,
+            view.getResolution(),
+            'EPSG:4326',
+            {'INFO_FORMAT': 'application/json', "feature_count": '1000'}
+        );
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                var jsonResponse = JSON.parse(xhttp.responseText);
+                if(jsonResponse.features.length != 0){
+                    closer.click();
+                    content.innerHTML = '';
+                    overlay.setPosition(evt.coordinate);
+                    
+                    //Offset
+                    var extent = map.getView().calculateExtent(map.getSize())
+                    var yoffset = (extent[3] - extent[1])*0.2
+                    
+                    map.getView().animate({
+                        center: [evt.coordinate[0], evt.coordinate[1] + yoffset],
+                        duration: 500
+                    });
+                    content.innerHTML += '<img src="' + jsonResponse.features[0].properties.img + '"/>';
+                    content.innerHTML += '<b>' + jsonResponse.features[0].properties.name + '</b><br/>';
+                    content.innerHTML += '<p>' + jsonResponse.features[0].properties.description + '</p>';
+                }
+            }
+        }
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    });
 }
 
 //Show elements on dropdown click
@@ -62,38 +123,13 @@ function snapTo(long, lat){
     map.getView().setZoom(13);
 }
 
-function hideFeature(id) {
+// var someFeature = ...; // create some feature
+// someFeature.set('style', someStyle) // set some style
+// var someFeatureLayer = ...; // create Layer from someFeature
+// map.addLayer( someFeatureLayer ); // add someFeatureLayer
 
-    var i,
-        feature,
-        layerSourceFeatures = map.pointsLayer.getSource().getFeatures(),
-        len = layerSourceFeatures.length;
 
-    var emptyImgStyle = new ol.style.Style({ image: '' });
-
-    // If an aces id was provided
-    if (id !== undefined) {
-        for( i = 0; i < len; i++ ) {
-            feature = layerSourceFeatures[i];
-
-            feature.setStyle(emptyImgStyle);
-
-            // Resetting feature style back to default function given in defaultPointStyleFunction()
-            if (feature.get('aces_id') == id) {
-                feature.setStyle(null);
-            }
-            // Hiding marker by removing its associated image
-            else {
-                feature.setStyle(emptyImgStyle);
-            }
-        }
-    }
-    // No id was provided - all points are hidden
-    else {
-        for( i = 0; i < len; i++ ) {
-            feature = layerSourceFeatures[i];
-            feature.setStyle(emptyImgStyle);
-        }
-    }
+function toggleFeatureVis(){
+    someFeatureLayer.set('visible', false);
+    someFeatureLayer.set('visible', true); 
 }
-
