@@ -4,6 +4,13 @@ src:
     local('Orbitron-Regular'),
     url('Orbitron-Regular.ttf');
 }
+
+@font-face {
+font-family: 'Raleway-Regular';
+src:
+    local('Raleway-Regular'),
+    url('Raleway-Regular.ttf');
+}
 html {
     display:relative;
 }
@@ -160,4 +167,99 @@ button.ol-zoom-out{
 
 .show {
     display: block;
+}
+
+.ol-popup {
+	position: absolute;
+	background-color: white;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	padding: 15px;
+	padding-top: 40px;
+	border-radius: 10px;
+	bottom: 12px;
+	left: -50px;
+	min-width: 300px;
+	z-index: 100;
+}
+
+.ol-popup:after, .ol-popup:before {
+	top: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.ol-popup:after {
+	border-top-color: white;
+	border-width: 10px;
+	left: 48px;
+	margin-left: -10px;
+}
+.ol-popup:before {
+	border-top-color: #cccccc;
+	border-width: 11px;
+	left: 48px;
+	margin-left: -11px;
+}
+.ol-popup-closer {
+	text-decoration: none;
+	position: absolute;
+	top: 2px;
+	right: 8px;
+	color: #d3d3d3;
+	transition: color 0.5s ease;
+}
+.ol-popup-closer:hover {
+	color: black;
+}
+.ol-popup-arrow {
+	text-decoration: none;
+	position: absolute;
+	top: 50%;
+	color: #d3d3d3;
+	transition: color 0.5s ease;
+	font-size: 22px;
+}
+.ol-popup-arrow:hover {
+	color: black;
+}
+.popup-content {
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: Raleway-Regular;
+	color: #00305B;
+	max-height: 250px;
+	overflow-y: scroll;
+}
+.popup-content img {
+	width: 100%;
+}
+.popup-header {
+	width: 100%;
+	background-color: #efebe5;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 30px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.popup-tab {
+	text-align: center;
+    border-radius: 5px;
+    background-color: #d3d3d3;
+    color: white;
+    cursor: pointer;
+}
+.popup-tab:hover {
+	color: #2f4f4f;
+}
+.snap{
+    background-color: rgba(188,228,133,0.65);
+    opacity: 60%;
+    color: white;
+    cursor:pointer;
 }

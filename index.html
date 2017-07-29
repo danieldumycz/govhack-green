@@ -11,6 +11,7 @@
     <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
     <link rel="stylesheet" href="css/normalize.css" type="text/css"/>
     <link rel="stylesheet" href="css/styles.css" type="text/css"/>
+	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">   
     <style type="text/css" media="screen, print">
   </style>
 </head>
@@ -23,9 +24,11 @@
     <div class="dropdown">
         <button class="dropbtn" onclick="dropFunction()"><div class="text-shadow">Snap to Location</div></button>
         <div class="dropdown-content" id="myDropdown">
-            <a id="myLink" onclick="snapTo(149.625699, -35.284922);">A</a>
-            <a id="myLink" onclick="snapTo(150.625699, -35.284922);">B</a>
-            <a id="myLink" onclick="snapTo(148.625699, -35.284922);">C</a>
+            <a class="snap" onclick="snapTo(149.123, -35.284922);">A</a>
+            <a class="snap" onclick="snapTo(149.123, -35.284922);">A</a>
+            <a class="snap" onclick="snapTo(150.625699, -35.284922);">B</a>
+            <a class="snap" onclick="snapTo(148.625699, -35.284922);">C</a>
+            <a class="snap" onclick="snapTo(148.625699, -35.284922);">C</a>
         </div>
     </div>
     <div id="map" class="map">

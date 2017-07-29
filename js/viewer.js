@@ -38,8 +38,9 @@ function init(){
     });
 
     var view = new ol.View({
-        center: ol.proj.transform([149.125699, -35.284922], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 12
+        center: [149.125699, -35.284922],
+        zoom: 12,
+        projection: 'EPSG:4326'
     })
 
     var scaleLineControl = new ol.control.ScaleLine();
@@ -107,19 +108,10 @@ function dropFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-// Close the dropdown on external click
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-    var myDropdown = document.getElementById("myDropdown");
-      if (myDropdown.classList.contains('show')) {
-        myDropdown.classList.remove('show');
-      }
-  }
-}
 
 function snapTo(long, lat){
     console.log(long + ", " + lat);
-    map.getView().setCenter(ol.proj.transform([long, lat], 'EPSG:4326', 'EPSG:3857'));
+    map.getView().setCenter([long, lat]);
     map.getView().setZoom(13);
 }
 
