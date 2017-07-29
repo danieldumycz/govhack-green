@@ -11,66 +11,33 @@
     <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
     <link rel="stylesheet" href="css/normalize.css" type="text/css"/>
     <link rel="stylesheet" href="css/styles.css" type="text/css"/>
-     <style type="text/css" media="screen, print">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css" media="screen, print">
   </style>
 </head>
-<body>
+<body onload=init()>
     <div class="nav">
         <div class="main"> GREEN </div>
         <div class="sub"> Growing Resilient & Environmentally Enduring Neighbourhoods</div>
         <div><a class="links"href="https://jielianbeh.wixsite.com/growcanberra" target="_href">About</a></div>
-        <!--<ul>
-            <li></li>
-        </ul>-->
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" onclick="dropFunction()"><div class="text-shadow">Snap to Location</div></button>
+        <div class="dropdown-content" id="myDropdown">
+            <a id="myLink" onclick="snapTo(149.625699, -35.284922);">A</a>
+            <a id="myLink" onclick="snapTo(150.625699, -35.284922);">B</a>
+            <a id="myLink" onclick="snapTo(148.625699, -35.284922);">C</a>
+        </div>
+    </div>
+    <div class="layerSelector">
+        <button class="dropbtn" onclick="dropFunction()"><div class="text-shadow">Snap to Location</div></button>
+        <div class="dropdown-content" id="myDropdown">
+            <a id="myLink" onclick="snapTo(149.625699, -35.284922);">A</a>
+            <a id="myLink" onclick="snapTo(150.625699, -35.284922);">B</a>
+            <a id="myLink" onclick="snapTo(148.625699, -35.284922);">C</a>
+        </div>
     </div>
     <div id="map" class="map"></div>
-        <script>
- 
-            // var hashMap = {};
-            // hashMap["Braddon A"] = [long,lat];
-            var url = 'http://data.actmapi.act.gov.au/arcgis/rest/services/actmapi/imagery2015mga/MapServer';
-            var baseUrl = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
-
-            var arcgisLayer = new ol.layer.Tile({
-                source: new ol.source.TileArcGISRest({
-                    url: url
-                })
-            });
-
-            var baseLayer = new ol.layer.Tile({
-                source: new ol.source.TileArcGISRest({
-                    url: baseUrl
-                })
-            });
-            
-
-
-            var center = [149.125699, -35.284922];
-
-            var proj = new ol.proj.Projection({
-                code: 'EPSG:4326',
-                units: 'm'
-            });
-
-            var view = new ol.View({
-            center: center,
-            zoom: 12,
-            projection: 'EPSG:4326'
-            });
-
-
-            var map = new ol.Map({
-                loadTilesWhileAnimating: false,
-                loadTilesWhileInteracting:false,
-                target: 'map',
-                layers: [baseLayer,arcgisLayer],
-                view: view
-
-            });
-        </script>
-    </div>
-
-
-
+    <script type="text/javascript" src="js/viewer.js"></script>
 </body>
 </html>
