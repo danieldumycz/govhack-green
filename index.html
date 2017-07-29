@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a responsive product landing page.">
+    <title>GREEN</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+    <link rel="stylesheet" href="css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
+     <style type="text/css" media="screen, print">
+  </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="main"> GREEN </div>
+        <div class="sub"> Growing Resilient & Environmentally Enduring Neighbourhoods</div>
+        <div><a class="links"href="https://jielianbeh.wixsite.com/growcanberra" target="_href">About</a></div>
+        <!--<ul>
+            <li></li>
+        </ul>-->
+    </div>
+    <div id="map" class="map"></div>
+        <script>
+ 
+            // var hashMap = {};
+            // hashMap["Braddon A"] = [long,lat];
+            var url = 'http://data.actmapi.act.gov.au/arcgis/rest/services/actmapi/imagery2015mga/MapServer';
+            var baseUrl = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
+
+            var arcgisLayer = new ol.layer.Tile({
+                source: new ol.source.TileArcGISRest({
+                    url: url
+                })
+            });
+
+            var baseLayer = new ol.layer.Tile({
+                source: new ol.source.TileArcGISRest({
+                    url: baseUrl
+                })
+            });
+            
+
+
+            var center = [149.125699, -35.284922];
+
+            var proj = new ol.proj.Projection({
+                code: 'EPSG:4326',
+                units: 'm'
+            });
+
+            var view = new ol.View({
+            center: center,
+            zoom: 12,
+            projection: 'EPSG:4326'
+            });
+
+
+            var map = new ol.Map({
+                loadTilesWhileAnimating: false,
+                loadTilesWhileInteracting:false,
+                target: 'map',
+                layers: [baseLayer,arcgisLayer],
+                view: view
+
+            });
+        </script>
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+@font-face {
+font-family: 'Orbitron-Regular';
+src:
+    local('Orbitron-Regular'),
+    url('Orbitron-Regular.ttf');
+}
+html {
+    display:relative;
+}
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+.map {
+    height:100vh;
+    width:100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.nav {
+    width: 100%;
+    height: 3.750em;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(188,228,133,0.65);
+    color: white;
+    line-height: 3.750em;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+.main {
+    margin: 0;
+    padding: 0 0 0 1em;
+    font-family: 'Orbitron-Regular';
+    font-size: 1.5em;
+    float:left;
+}
+
+.sub {
+    padding: 0 0 0 1.5em;
+    float:left;
+    font-family: 'Orbitron-Regular';
+    font-size: 0.75em;
+}
+
+.links {
+    text-decoration: none;
+    font-family: 'Orbitron-Regular';
+    float:right;
+    color: white;
+    padding: 0 1em 0 0;
+
+}
+
+/*
+ul.nav {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+} */
+
+.ol-zoom {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    top: auto;
+}
