@@ -120,15 +120,11 @@ button.ol-zoom-out{
     right: 1em;
     padding: 10px;
     text-align: left;
-    color: white;
-    text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;  
     font-size: 12px;
-    border: 5px;
+    border: 5px 5px 5px 5px;
+    border-style: double;
     font-family: Raleway-Regular;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .dropdown {
@@ -251,7 +247,7 @@ button.ol-zoom-out{
 	padding-right: 20px;
 	font-family: Raleway-Regular;
 	color: #00305B;
-	max-height: 250px;
+	max-height: 45vh;
 	overflow-y: scroll;
 }
 .popup-content img {
@@ -291,3 +287,42 @@ a.snap{
     0.5px 0.5px 0 #000;  
 }
 
+label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+  padding-bottom: 15px;
+}
+input {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+}
+
+.gradient {
+  background: -webkit-linear-gradient(green, orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient2 {
+  background: green; /* For browsers that do not support gradients */
+  background: linear-gradient(to right, lightgreen , red); /* Standard syntax */
+}
+
+@media only screen and (max-width: 768px) {
+	.nav {
+		display: none;
+	}
+	.data-list {
+		display: none;
+	}
+	.dropdown {
+		display: none;
+	}
+}

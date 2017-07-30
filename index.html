@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A layout example that shows off a responsive product landing page.">
     <title>GREEN</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
     <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -12,38 +13,42 @@
     <link rel="stylesheet" href="css/normalize.css" type="text/css"/>
     <link rel="stylesheet" href="css/styles.css" type="text/css"/>
 	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">   
-    <style type="text/css" media="screen, print">
-  </style>
+    <style type="text/css" media="screen, print"></style>
 </head>
 <body onload=init()>
     <div class="nav">
         <div class="main"> GREEN </div>
-        <div class="sub"> Growing Resilient & Environmentally Enduring Neighbourhoods</div>
-        <div><a class="links"href="https://jielianbeh.wixsite.com/growcanberra" target="_href">About</a></div>
+        <div class="sub"> Growing Resilient Environmentally Enduring Neighbourhoods</div>
+        <div><a class="links"href="https://jielianbeh.wixsite.com/greenapp" target="_href">About</a></div>
     </div>
     <div class="dropdown">
-        <button class="dropbtn" onclick="dropFunction()"><div class="snappy">Snap Location</div></button>
+        <button class="dropbtn" onclick="dropFunction()"><div class="snappy">Potential Gardens</div></button>
         <div class="dropdown-content" id="myDropdown">
-            <a class="snap" onclick="snapTo(149.125355, -35.271121);">Turner</a>
-            <a class="snap" onclick="snapTo(149.095298, -35.369600);">Mawson</a>
-            <a class="snap" onclick="snapTo(149.038774, -35.346584);">Rivett</a>
-            <a class="snap" onclick="snapTo(149.071612, -35.224608);">Diddams</a>
-            <a class="snap" onclick="snapTo(149.006012, -35.215145);">MacGregor</a>
-            <a class="snap" onclick="snapTo(149.157594, -35.192059);">Harrison</a>
-            <a class="snap" onclick="snapTo(149.108991, -35.158830);">Moncrieff A</a>
-            <a class="snap" onclick="snapTo(149.118609,	-35.153569);">Moncrieff B</a>
-            <a class="snap" onclick="snapTo(149.073935,	-35.245798);">Belconnen</a>
-            <a class="snap" onclick="snapTo(149.067601,	-35.424946);">Greenway</a>
+            <a class="snap" onclick="snapTo(149.125355, -35.271121);">Turner Parkland</a>
+            <a class="snap" onclick="snapTo(149.109065, -35.159509);">Moncrieff A</a>
+            <a class="snap" onclick="snapTo(149.118609, -35.153569);">Moncrieff B</a>
+            <a class="snap" onclick="snapTo(149.094245, -35.370899)">Woden Valley Creek</a>	
+            <a class="snap" onclick="snapTo(149.067419, -35.425511);">Greenway</a>
+            <a class="snap" onclick="snapTo(149.004002, -35.217319);">MacGregor</a>
+            <a class="snap" onclick="snapTo(149.158887, -35.191285);">Harrison/Thorsby</a>
+            <a class="snap" onclick="snapTo(149.048100,	-35.351610);">Weston Creek</a>
+            <a class="snap" onclick="snapTo(149.071540, -35.224708);">Belconnen Lake</a>
+            <a class="snap" onclick="snapTo(149.073668,	-35.244492);">Eastern Valley</a>
             <a class="snap" onclick="resetView();">Reset</a>
         </div>
     </div>
     <div class="data-list">
-        <p> Data List </p>
-        <input  id="checkbox2" type="checkbox" name="gardens" onclick="toggleFeatureVis('gardens')" checked/> Gardens
-        <br><input id="checkbox2" type="checkbox" name="floods" onclick="toggleFeatureVis('floods')"/> Floods
-        <br><input  id="checkbox2" type="checkbox" name="fires" onclick="toggleFeatureVis('fires')"/> Fires
-        <br><input  id="checkbox2" type="checkbox" name="crimes" onclick="toggleFeatureVis('crimes')"/> Crimes
-        <br><input  id="checkbox2" type="checkbox" name="buses" onclick="toggleFeatureVis('buses')"/> Buses
+        <p> Legend </p>
+        <label style="color:green"><img alt="pin" style="width:10px;height:10px" src="img/green_pin.png"></img> Current Gardens</label>
+        <label for="garden" style="color:#00305b"><input id="checkbox2" type="checkbox" name="gardens" onclick="toggleFeatureVis('gardens')" checked/> Proposed Gardens</label>
+        <label for="garden" style="color:blue"><input id="checkbox2" type="checkbox" name="buses" onclick="toggleFeatureVis('buses')" /> Bus Routes</label>
+        <label for="garden" style="color:lightblue"><input id="checkbox2" type="checkbox" name="flood" onclick="toggleFeatureVis('floods')" /> Flood Zones</label>
+        <label for="garden" style="color:pink"><input id="checkbox2" type="checkbox" name="fires" onclick="toggleFeatureVis('fires')" /> Threatened Zones</label>
+        <label for="garden" ><input id="checkbox2" type="checkbox" name="crimes" onclick="toggleFeatureVis('crimes')" /> Social Need
+        </label>
+        <div class="gradient2" style="width:100%;height:10px;border:0.5px solid #000;"></div>
+        <div style="font-size:8px;float:left">Low</div><div style="font-size:8px;float:right">High</div>
+        
     </div>
     <div id="map" class="map">
         <div id="popup" class="ol-popup">
