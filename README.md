@@ -17,7 +17,7 @@ The ACT currently has 13 established community gardens for growing organic produ
 
 By exploiting a range of geospatial, ecological, transport and population data, we have created an analytical tool to determine suitable sites for future community gardens.
  
-As Canberra is rapidly expanding with housing density increasing but social cohesion decreasing, we believe that incorporating community gardens into urban planning is a step towards improving liveability in our city.
+As Canberra is rapidly expanding with housing density increasing but social cohesion decreasing, we believe that incorporating community gardens into urban planning is a step towards improving livability in our city.
 ​
 The GREEN app is the beginning.......
 
