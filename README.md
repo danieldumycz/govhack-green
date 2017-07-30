@@ -21,3 +21,6 @@ As Canberra is rapidly expanding with housing density increasing but social cohe
 ​
 The GREEN app is the beginning.......
 
+# Pre-requisites 
+
+App requires an internet connection and deployable environment to be fully capable.
