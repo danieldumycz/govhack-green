@@ -1,7 +1,66 @@
 //GLOBALS
 var map;
+//GLOBAL MAP TILES
+var proposedGardens = new ol.layer.Tile({
+    source: new ol.source.TileWMS(({
+        url: 'http://gis.opboomtown.com/geoserver/wms',
+        params: {'LAYERS': 'cite:potential_sites2', 'TILED': true},
+        serverType: 'geoserver'
+    }))
+})
+
+var threatenedWoodLands = new ol.layer.Tile({
+    source: new ol.source.TileArcGISRest(({
+        url: 'http://data.actmapi.act.gov.au/arcgis/rest/services/data_extract/Environment/MapServer',
+        params: {'layers': 'show:8', 'TILED': true},
+    }))
+});
+
+var floodZones = new ol.layer.Tile({
+    source: new ol.source.TileArcGISRest(({
+        url: 'http://data.actmapi.act.gov.au/arcgis/rest/services/data_extract/Emergency_Management/MapServer/',
+        params: {'layers': 'show:0', 'TILED': true},
+    }))
+});
+
+var busRoutes = new ol.layer.Tile({
+    source: new ol.source.TileWMS(({
+        url: 'http://gis.opboomtown.com/geoserver/wms',
+        params: {'LAYERS': 'cite:bus_routes', 'TILED': true},
+        serverType: 'geoserver'
+    }))
+});
+
+var currentGardens = new ol.layer.Tile({
+    source: new ol.source.TileWMS(({
+        url: 'http://gis.opboomtown.com/geoserver/wms',
+        params: {'LAYERS': 'cite:communitygardens', 'TILED': true},
+        serverType: 'geoserver'
+    }))
+});
+
+var crimeStats = new ol.layer.Tile({
+    source: new ol.source.TileWMS(({
+        url: 'http://gis.opboomtown.com/geoserver/wms',
+        params: {'LAYERS': 'cite:Potential_sites_Attributed_v2_pt2', 'TILED': true},
+        serverType: 'geoserver'
+    }))
+});
+
+var featuresDict = {};
+featuresDict["gardens"] = proposedGardens;
+featuresDict["floods"] = floodZones;
+featuresDict["crimes"] = crimeStats;
+featuresDict["buses"] = busRoutes;
+featuresDict["fires"] = threatenedWoodLands;
 
 function init(){
+    //Disable Layers
+    featuresDict["floods"].setVisible(false);
+    featuresDict["crimes"].setVisible(false);
+    featuresDict["buses"].setVisible(false);
+    featuresDict["fires"].setVisible(false);
+
     var url = 'http://data.actmapi.act.gov.au/arcgis/rest/services/actmapi/imagery2015mga/MapServer';
     var baseUrl = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
     // Set up pop-up wrappers
@@ -16,7 +75,7 @@ function init(){
         //vectorLayer.getSource().clear();
         return false;
     };
-
+    
     var arcgisLayer = new ol.layer.Tile({
         source: new ol.source.TileArcGISRest({
             url: url
@@ -29,13 +88,6 @@ function init(){
         })
     });
 
-	var currentGardens = new ol.layer.Tile({
-        source: new ol.source.TileWMS(({
-            url: 'http://gis.opboomtown.com/geoserver/wms',
-            params: {'LAYERS': 'cite:communitygardens', 'TILED': true},
-            serverType: 'geoserver'
-        }))
-    });
 
     var view = new ol.View({
         center: [149.125699, -35.284922],
@@ -56,7 +108,7 @@ function init(){
         loadTilesWhileAnimating: false,
         loadTilesWhileInteracting:false,
         target: 'map',
-        layers: [baseLayer,arcgisLayer,currentGardens],
+        layers: [baseLayer,arcgisLayer,crimeStats,threatenedWoodLands, floodZones, busRoutes,currentGardens,proposedGardens],
         view: view,
         overlays: [overlay]
     });
@@ -108,20 +160,21 @@ function dropFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+function resetView(){
+    map.getView().setCenter([149.125699, -35.284922]);
+    map.getView().setZoom(11);
+}
 
 function snapTo(long, lat){
     console.log(long + ", " + lat);
-    map.getView().setCenter([long, lat]);
-    map.getView().setZoom(13);
+    map.getView().setCenter([long,lat]);
+    map.getView().setZoom(17);
 }
 
-// var someFeature = ...; // create some feature
-// someFeature.set('style', someStyle) // set some style
-// var someFeatureLayer = ...; // create Layer from someFeature
-// map.addLayer( someFeatureLayer ); // add someFeatureLayer
-
-
-function toggleFeatureVis(){
-    someFeatureLayer.set('visible', false);
-    someFeatureLayer.set('visible', true); 
+function toggleFeatureVis(value){
+    if(featuresDict[value].getVisible()){
+        featuresDict[value].setVisible(false);
+    } else {
+        featuresDict[value].setVisible(true);
+    }
 }

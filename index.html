@@ -22,14 +22,28 @@
         <div><a class="links"href="https://jielianbeh.wixsite.com/growcanberra" target="_href">About</a></div>
     </div>
     <div class="dropdown">
-        <button class="dropbtn" onclick="dropFunction()"><div class="text-shadow">Snap to Location</div></button>
+        <button class="dropbtn" onclick="dropFunction()"><div class="snappy">Snap Location</div></button>
         <div class="dropdown-content" id="myDropdown">
-            <a class="snap" onclick="snapTo(149.123, -35.284922);">A</a>
-            <a class="snap" onclick="snapTo(149.123, -35.284922);">A</a>
-            <a class="snap" onclick="snapTo(150.625699, -35.284922);">B</a>
-            <a class="snap" onclick="snapTo(148.625699, -35.284922);">C</a>
-            <a class="snap" onclick="snapTo(148.625699, -35.284922);">C</a>
+            <a class="snap" onclick="snapTo(149.125355, -35.271121);">Turner</a>
+            <a class="snap" onclick="snapTo(149.095298, -35.369600);">Mawson</a>
+            <a class="snap" onclick="snapTo(149.038774, -35.346584);">Rivett</a>
+            <a class="snap" onclick="snapTo(149.071612, -35.224608);">Diddams</a>
+            <a class="snap" onclick="snapTo(149.006012, -35.215145);">MacGregor</a>
+            <a class="snap" onclick="snapTo(149.157594, -35.192059);">Harrison</a>
+            <a class="snap" onclick="snapTo(149.108991, -35.158830);">Moncrieff A</a>
+            <a class="snap" onclick="snapTo(149.118609,	-35.153569);">Moncrieff B</a>
+            <a class="snap" onclick="snapTo(149.073935,	-35.245798);">Belconnen</a>
+            <a class="snap" onclick="snapTo(149.067601,	-35.424946);">Greenway</a>
+            <a class="snap" onclick="resetView();">Reset</a>
         </div>
+    </div>
+    <div class="data-list">
+        <p> Data List </p>
+        <input  id="checkbox2" type="checkbox" name="gardens" onclick="toggleFeatureVis('gardens')" checked/> Gardens
+        <br><input id="checkbox2" type="checkbox" name="floods" onclick="toggleFeatureVis('floods')"/> Floods
+        <br><input  id="checkbox2" type="checkbox" name="fires" onclick="toggleFeatureVis('fires')"/> Fires
+        <br><input  id="checkbox2" type="checkbox" name="crimes" onclick="toggleFeatureVis('crimes')"/> Crimes
+        <br><input  id="checkbox2" type="checkbox" name="buses" onclick="toggleFeatureVis('buses')"/> Buses
     </div>
     <div id="map" class="map">
         <div id="popup" class="ol-popup">
