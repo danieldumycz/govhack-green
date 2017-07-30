@@ -13,7 +13,7 @@ The ACT community is rapidly growing, with an increase of approximately 50,000 p
 
 The ACT currently has 13 established community gardens for growing organic produce. However with the territories rapidly growing population it would be beneficial to establish more. The GREEN app takes population density, household size and income, ethnicity, crime statistics, flood, city planning and bus routes data to propose optimal new sites for locating new community gardens. The app then uses ACT aerial data to plot these locations on a map of the ACT. 
 
-#Project Objectives
+# Project Objectives
 
 By exploiting a range of geospatial, ecological, transport and population data, we have created an analytical tool to determine suitable sites for future community gardens.
  
